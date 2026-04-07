@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Download, Mail, Link2, RefreshCw, Check, X, User, Phone } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 import { useNavigate } from "react-router";
-
+//ewfrsdkljsfzc
 export function FinalResult() {
   const { selections } = useDesign();
   const navigate = useNavigate();
