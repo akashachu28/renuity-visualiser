@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, ArrowLeft } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 
 interface Category {
@@ -46,8 +46,19 @@ export function CategoryTierSelect() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F4F0] py-16 px-6">
+    <div className="min-h-screen bg-[#F5F4F0] py-16 px-6 relative">
       <div className="max-w-6xl mx-auto">
+        {/* Back Button */}
+        <motion.button
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          onClick={() => navigate("/zip")}
+          className="absolute top-12 left-12 flex items-center gap-2 text-[#1A3A52] hover:text-[#2A9D8F] font-medium transition-colors"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          Back to Zip Code
+        </motion.button>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
