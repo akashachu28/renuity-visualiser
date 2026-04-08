@@ -53,10 +53,10 @@ const SKU_OPTIONS: SKUOption[] = [
     imageUrl: "/assets/bathtub2_white.png",
     imageUrlGolden: "/assets/bathtub2_ivory.png",
   },
-  // Fixtures - Economic
+  // Faucet - Economic
   {
     id: "fixture-chrome",
-    category: "Fixtures",
+    category: "Faucet",
     name: "Chrome Faucet Set",
     price: "$299",
     tier: "economic",
@@ -65,17 +65,17 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "fixture-nickel",
-    category: "Fixtures",
+    category: "Faucet",
     name: "Brushed Nickel Set",
     price: "$349",
     tier: "economic",
     imageUrl: "/assets/shower1_silver.png",
     imageUrlGolden: "/assets/shower1_gold.png"
   },
-  // Fixtures - Luxury
+  // Faucet - Luxury
   {
     id: "fixture-brass",
-    category: "Fixtures",
+    category: "Faucet",
     name: "Brass Faucet Set",
     price: "$449",
     tier: "luxury",
@@ -84,18 +84,18 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "fixture-black",
-    category: "Fixtures",
+    category: "Faucet",
     name: "Matte Black Faucet Set",
     price: "$599",
     tier: "luxury",
     imageUrl: "/assets/shower1_silver.png",
     imageUrlGolden: "/assets/shower1_gold.png"
   },
-  // Curtains - Economic
+  // Curtain - Economic
   {
     id: "tile-ceramic",
-    category: "Curtains",
-    name: "Gray Ceramic Tiles",
+    category: "Curtain",
+    name: "Gray Normal Curtain",
     price: "$45/sq ft",
     tier: "economic",
     imageUrl: "/assets/curtains_silver.png",
@@ -103,18 +103,18 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "tile-subway",
-    category: "Curtains",
-    name: "Classic Subway Tiles",
+    category: "Curtain",
+    name: "Classic Silver Curtain",
     price: "$55/sq ft",
     tier: "economic",
     imageUrl: "/assets/curtains_silver.png",
     imageUrlGolden: "/assets/curtains_golden.png"
   },
-  // Curtains - Luxury
+  // Curtain - Luxury
   {
     id: "tile-marble",
-    category: "Curtains",
-    name: "White Marble Tiles",
+    category: "Curtain",
+    name: "White Curtain",
     price: "$89/sq ft",
     tier: "luxury",
     imageUrl: "/assets/curtains_silver.png",
@@ -122,18 +122,18 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "tile-stone",
-    category: "Curtains",
-    name: "Natural Stone Tiles",
+    category: "Curtain",
+    name: "Natural Stone Curtain",
     price: "$129/sq ft",
     tier: "luxury",
     imageUrl: "/assets/curtains_silver.png",
     imageUrlGolden: "/assets/curtains_golden.png"
   },
-  // Window - Economic
+  // Door - Economic
   {
     id: "floor-laminate",
-    category: "Window",
-    name: "Waterproof Laminate",
+    category: "Door",
+    name: "Classic Silver Door",
     price: "$12/sq ft",
     tier: "economic",
     imageUrl: "/assets/window_silver.png",
@@ -141,18 +141,18 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "floor-vinyl",
-    category: "Window",
-    name: "Luxury Vinyl Plank",
+    category: "Door",
+    name: "Ellegance Door",
     price: "$15/sq ft",
     tier: "economic",
     imageUrl: "/assets/window_silver.png",
     imageUrlGolden: "/assets/window_gold.png"
   },
-  // Window - Luxury
+  // Door - Luxury
   {
     id: "floor-herringbone",
-    category: "Window",
-    name: "Herringbone Porcelain",
+    category: "Door",
+    name: "Herringbone Door",
     price: "$35/sq ft",
     tier: "luxury",
     imageUrl: "/assets/window_silver.png",
@@ -160,8 +160,8 @@ const SKU_OPTIONS: SKUOption[] = [
   },
   {
     id: "floor-slate",
-    category: "Window",
-    name: "Premium Slate Tile",
+    category: "Door",
+    name: "Premium Slate Door",
     price: "$45/sq ft",
     tier: "luxury",
     imageUrl: "/assets/window_silver.png",
@@ -234,10 +234,15 @@ export function ProductConfiguration() {
     }
   };
 
-  const handleColorSelect = (productId: string, color: "white" | "golden") => {
+  const handleColorSelect = (productId: string, color: "white" | "golden", category: string) => {
     setSelectedColors((prev) => ({
       ...prev,
       [productId]: color,
+    }));
+    // Automatically select the product when color is clicked
+    setSelectedProducts((prev) => ({
+      ...prev,
+      [category]: productId,
     }));
   };
 
@@ -294,10 +299,10 @@ export function ProductConfiguration() {
 
     updateSelections({
       visualizer: {
-        wallFinish: products.find((p) => p.category === "Curtains")?.name || "",
+        wallFinish: products.find((p) => p.category === "Curtain")?.name || "",
         tubStyle: products.find((p) => p.category === "Bathtub")?.name || "",
-        fixture: products.find((p) => p.category === "Fixtures")?.name || "",
-        flooring: products.find((p) => p.category === "Window")?.name || "",
+        fixture: products.find((p) => p.category === "Faucet")?.name || "",
+        flooring: products.find((p) => p.category === "Door")?.name || "",
       },
       selectedProductsData,
     });
@@ -334,7 +339,7 @@ export function ProductConfiguration() {
             </div>
             <div className="flex items-center gap-4">
               <button
-                onClick={() => navigate(-1)}
+                onClick={() => navigate("/room")}
                 className="text-sm font-bold text-[#1A3A52] hover:underline"
               >
                 Back
@@ -457,7 +462,7 @@ export function ProductConfiguration() {
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      handleColorSelect(product.id, "white");
+                                      handleColorSelect(product.id, "white", category);
                                     }}
                                     className={`w-4 h-4 rounded-full bg-gradient-to-br from-[#ffffff] to-[#f4f3f0] border-1 transition-all ${
                                       selectedColors[product.id] === "white"
@@ -469,7 +474,7 @@ export function ProductConfiguration() {
                                   <button
                                     onClick={(e) => {
                                       e.stopPropagation();
-                                      handleColorSelect(product.id, "golden");
+                                      handleColorSelect(product.id, "golden", category);
                                     }}
                                     className={`w-4 h-4 rounded-full bg-gradient-to-br from-[#FEFAE6] to-[#DACFAB] border-1 transition-all ${
                                       selectedColors[product.id] === "golden"
@@ -596,19 +601,19 @@ export function ProductConfiguration() {
                         );
                       })()}
 
-                          {/* Overlay Selected Fixtures */}
-                          {selectedProducts["Fixtures"] && (() => {
+                          {/* Overlay Selected Faucet */}
+                          {selectedProducts["Faucet"] && (() => {
                             const selectedFixture = SKU_OPTIONS.find(
-                              (s) => s.id === selectedProducts["Fixtures"]
+                              (s) => s.id === selectedProducts["Faucet"]
                             );
-                            const selectedColor = selectedColors[selectedProducts["Fixtures"]] || "white";
+                            const selectedColor = selectedColors[selectedProducts["Faucet"]] || "white";
                             const fixtureImageUrl = selectedColor === "golden" && selectedFixture?.imageUrlGolden
                               ? selectedFixture.imageUrlGolden
                               : selectedFixture?.imageUrl;
 
                             return (
                               <motion.img
-                                key={selectedProducts["Fixtures"] + selectedColor}
+                                key={selectedProducts["Faucet"] + selectedColor}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.4 }}
@@ -625,19 +630,19 @@ export function ProductConfiguration() {
                             );
                           })()}
 
-                          {/* Overlay Selected Curtains */}
-                          {selectedProducts["Curtains"] && (() => {
+                          {/* Overlay Selected Curtain */}
+                          {selectedProducts["Curtain"] && (() => {
                             const selectedCurtain = SKU_OPTIONS.find(
-                              (s) => s.id === selectedProducts["Curtains"]
+                              (s) => s.id === selectedProducts["Curtain"]
                             );
-                            const selectedColor = selectedColors[selectedProducts["Curtains"]] || "white";
+                            const selectedColor = selectedColors[selectedProducts["Curtain"]] || "white";
                             const curtainImageUrl = selectedColor === "golden" && selectedCurtain?.imageUrlGolden
                               ? selectedCurtain.imageUrlGolden
                               : selectedCurtain?.imageUrl;
 
                             return (
                               <motion.img
-                                key={selectedProducts["Curtains"] + selectedColor}
+                                key={selectedProducts["Curtain"] + selectedColor}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.4 }}
@@ -655,24 +660,24 @@ export function ProductConfiguration() {
                             );
                           })()}
 
-                          {/* Overlay Selected Window */}
-                          {selectedProducts["Window"] && (() => {
+                          {/* Overlay Selected Door */}
+                          {selectedProducts["Door"] && (() => {
                             const selectedWindow = SKU_OPTIONS.find(
-                              (s) => s.id === selectedProducts["Window"]
+                              (s) => s.id === selectedProducts["Door"]
                             );
-                            const selectedColor = selectedColors[selectedProducts["Window"]] || "white";
+                            const selectedColor = selectedColors[selectedProducts["Door"]] || "white";
                             const windowImageUrl = selectedColor === "golden" && selectedWindow?.imageUrlGolden
                               ? selectedWindow.imageUrlGolden
                               : selectedWindow?.imageUrl;
 
                             return (
                               <motion.img
-                                key={selectedProducts["Window"] + selectedColor}
+                                key={selectedProducts["Door"] + selectedColor}
                                 initial={{ opacity: 0, scale: 0.9 }}
                                 animate={{ opacity: 1, scale: 1 }}
                                 transition={{ duration: 0.4 }}
                                 src={windowImageUrl}
-                                alt="Selected Window"
+                                alt="Selected Door"
                                 className="absolute pointer-events-none object-contain"
                                 style={{
                                   top: '-10%',
@@ -747,7 +752,7 @@ export function ProductConfiguration() {
 
               <button
                 onClick={handleContinue}
-                className="flex items-center gap-3 px-6 py-3 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-[16px] shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0"
+                className="flex items-center gap-3 px-5 py-3 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-[15px] shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0"
               >
                 <span>View Final Design</span>
                 <ArrowRight className="w-6 h-6" />

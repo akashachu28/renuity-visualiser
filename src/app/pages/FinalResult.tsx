@@ -117,13 +117,13 @@ export function FinalResult() {
                       />
                     )}
 
-                    {/* Overlay Selected Fixtures */}
-                    {selections.selectedProductsData?.["Fixtures"] && (
+                    {/* Overlay Selected Faucet */}
+                    {selections.selectedProductsData?.["Faucet"] && (
                       <motion.img
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.4 }}
-                        src={selections.selectedProductsData["Fixtures"].imageUrl}
+                        src={selections.selectedProductsData["Faucet"].imageUrl}
                         alt="Selected Fixture"
                         className="absolute pointer-events-none object-contain"
                         style={{
@@ -135,13 +135,13 @@ export function FinalResult() {
                       />
                     )}
 
-                    {/* Overlay Selected Curtains */}
-                    {selections.selectedProductsData?.["Curtains"] && (
+                    {/* Overlay Selected Curtain */}
+                    {selections.selectedProductsData?.["Curtain"] && (
                       <motion.img
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.5 }}
-                        src={selections.selectedProductsData["Curtains"].imageUrl}
+                        src={selections.selectedProductsData["Curtain"].imageUrl}
                         alt="Selected Curtain"
                         className="absolute pointer-events-none object-contain"
                         style={{
@@ -154,14 +154,14 @@ export function FinalResult() {
                       />
                     )}
 
-                    {/* Overlay Selected Window */}
-                    {selections.selectedProductsData?.["Window"] && (
+                    {/* Overlay Selected Door */}
+                    {selections.selectedProductsData?.["Door"] && (
                       <motion.img
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.6, delay: 0.6 }}
-                        src={selections.selectedProductsData["Window"].imageUrl}
-                        alt="Selected Window"
+                        src={selections.selectedProductsData["Door"].imageUrl}
+                        alt="Selected Door"
                         className="absolute pointer-events-none object-contain"
                         style={{
                           top: '-10%',
@@ -210,10 +210,10 @@ export function FinalResult() {
                 </div>
               )}
 
-              {/* Wall Finish */}
+              {/* Wall Finish (Curtain) */}
               {selections.visualizer?.wallFinish && (
                 <div>
-                  <p className="text-sm text-[#6B6B6B] mb-2">Wall Finish</p>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Curtain</p>
                   <p className="text-lg font-medium text-[#1A3A52]">
                     {selections.visualizer.wallFinish}
                   </p>
@@ -223,27 +223,27 @@ export function FinalResult() {
               {/* Tub Style */}
               {selections.visualizer?.tubStyle && (
                 <div>
-                  <p className="text-sm text-[#6B6B6B] mb-2">Style</p>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Bathtub</p>
                   <p className="text-lg font-medium text-[#1A3A52]">
                     {selections.visualizer.tubStyle}
                   </p>
                 </div>
               )}
 
-              {/* Fixtures */}
+              {/* Fixtures (Faucet) */}
               {selections.visualizer?.fixture && (
                 <div>
-                  <p className="text-sm text-[#6B6B6B] mb-2">Fixture Finish</p>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Faucet</p>
                   <p className="text-lg font-medium text-[#1A3A52]">
                     {selections.visualizer.fixture}
                   </p>
                 </div>
               )}
 
-              {/* Flooring */}
+              {/* Flooring (Door) */}
               {selections.visualizer?.flooring && (
                 <div>
-                  <p className="text-sm text-[#6B6B6B] mb-2">Flooring</p>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Door</p>
                   <p className="text-lg font-medium text-[#1A3A52]">
                     {selections.visualizer.flooring}
                   </p>
