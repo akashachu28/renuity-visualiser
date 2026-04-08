@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { Check, ArrowRight, Sparkles, Loader2 } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Loader2, X } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 
 interface SKUOption {
@@ -11,6 +11,7 @@ interface SKUOption {
   price: string;
   tier: "economic" | "luxury";
   imageUrl: string;
+  imageUrlGolden?: string; // Optional golden/ivory variant
 }
 
 const SKU_OPTIONS: SKUOption[] = [
@@ -21,7 +22,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Classic Alcove Tub",
     price: "$1,299",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1723015814159-685e9ed894a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljJTIwYWxjb3ZlJTIwYmF0aHR1YnxlbnwxfHx8fDE3NzUxMzE0MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/bathtub1_white.png",
+    imageUrlGolden: "/src/app/assets/bathtub1_ivory.png",
   },
   {
     id: "tub-standard",
@@ -29,7 +31,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Standard Soaking Tub",
     price: "$1,799",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1723015814159-685e9ed894a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjbGFzc2ljJTIwYWxjb3ZlJTIwYmF0aHR1YnxlbnwxfHx8fDE3NzUxMzE0MTB8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/bathtub2_white.png",
+    imageUrlGolden: "/src/app/assets/bathtub2_ivory.png",
   },
   // Bathtubs - Luxury
   {
@@ -38,7 +41,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Modern Freestanding Tub",
     price: "$2,499",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1773867567838-3292f16e4aca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmcmVlc3RhbmRpbmclMjBiYXRodHViJTIwd2hpdGV8ZW58MXx8fHwxNzc1MTMxNDEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/bathtub1_white.png",
+    imageUrlGolden: "/src/app/assets/bathtub1_ivory.png",
   },
   {
     id: "tub-luxury",
@@ -46,7 +50,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Luxury Soaking Tub",
     price: "$3,999",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1773867567838-3292f16e4aca?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxtb2Rlcm4lMjBmcmVlc3RhbmRpbmclMjBiYXRodHViJTIwd2hpdGV8ZW58MXx8fHwxNzc1MTMxNDEwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/bathtub2_white.png",
+    imageUrlGolden: "/src/app/assets/bathtub2_ivory.png",
   },
   // Fixtures - Economic
   {
@@ -55,7 +60,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Chrome Faucet Set",
     price: "$299",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1773177930292-463ca3c5b86a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHJvbWUlMjBiYXRocm9vbSUyMGZhdWNldHxlbnwxfHx8fDE3NzUwNzIwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/shower2_silver.png",
+    imageUrlGolden: "/src/app/assets/shower2_gold.png"
   },
   {
     id: "fixture-nickel",
@@ -63,7 +69,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Brushed Nickel Set",
     price: "$349",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1773177930292-463ca3c5b86a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjaHJvbWUlMjBiYXRocm9vbSUyMGZhdWNldHxlbnwxfHx8fDE3NzUwNzIwMjR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/shower1_silver.png",
+    imageUrlGolden: "/src/app/assets/shower1_gold.png"
   },
   // Fixtures - Luxury
   {
@@ -72,7 +79,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Brass Faucet Set",
     price: "$449",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1771681744660-d3ff70bc24a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFzcyUyMGJhdGhyb29tJTIwZmF1Y2V0fGVufDF8fHx8MTc3NTA3MjAyNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/shower2_silver.png",
+    imageUrlGolden: "/src/app/assets/shower2_gold.png"
   },
   {
     id: "fixture-black",
@@ -80,75 +88,84 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Matte Black Faucet Set",
     price: "$599",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1771681744660-d3ff70bc24a2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxicmFzcyUyMGJhdGhyb29tJTIwZmF1Y2V0fGVufDF8fHx8MTc3NTA3MjAyNXww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/shower1_silver.png",
+    imageUrlGolden: "/src/app/assets/shower1_gold.png"
   },
-  // Wall Tiles - Economic
+  // Curtains - Economic
   {
     id: "tile-ceramic",
-    category: "Wall Tiles",
+    category: "Curtains",
     name: "Gray Ceramic Tiles",
     price: "$45/sq ft",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1681752054467-e7132ed8b47e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmF5JTIwY2VyYW1pYyUyMHRpbGUlMjBiYXRocm9vbXxlbnwxfHx8fDE3NzUxMzE0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/curtains_silver.png",
+    imageUrlGolden: "/src/app/assets/curtains_golden.png"
   },
   {
     id: "tile-subway",
-    category: "Wall Tiles",
+    category: "Curtains",
     name: "Classic Subway Tiles",
     price: "$55/sq ft",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1681752054467-e7132ed8b47e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxncmF5JTIwY2VyYW1pYyUyMHRpbGUlMjBiYXRocm9vbXxlbnwxfHx8fDE3NzUxMzE0MTJ8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/curtains_silver.png",
+    imageUrlGolden: "/src/app/assets/curtains_golden.png"
   },
-  // Wall Tiles - Luxury
+  // Curtains - Luxury
   {
     id: "tile-marble",
-    category: "Wall Tiles",
+    category: "Curtains",
     name: "White Marble Tiles",
     price: "$89/sq ft",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1572742482459-e04d6cfdd6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGl0ZSUyMG1hcmJsZSUyMHRpbGUlMjBiYXRocm9vbXxlbnwxfHx8fDE3NzUxMzE0MTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/curtains_silver.png",
+    imageUrlGolden: "/src/app/assets/curtains_golden.png"
   },
   {
     id: "tile-stone",
-    category: "Wall Tiles",
+    category: "Curtains",
     name: "Natural Stone Tiles",
     price: "$129/sq ft",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1572742482459-e04d6cfdd6f3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx3aGl0ZSUyMG1hcmJsZSUyMHRpbGUlMjBiYXRocm9vbXxlbnwxfHx8fDE3NzUxMzE0MTF8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+    imageUrl: "/src/app/assets/curtains_silver.png",
+    imageUrlGolden: "/src/app/assets/curtains_golden.png"
   },
-  // Flooring - Economic
+  // Window - Economic
   {
     id: "floor-laminate",
-    category: "Flooring",
+    category: "Window",
     name: "Waterproof Laminate",
     price: "$12/sq ft",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1581858726785-0d7353fd9461?q=80&w=500",
+    imageUrl: "/src/app/assets/window_silver.png",
+    imageUrlGolden: "/src/app/assets/window_gold.png"
   },
   {
     id: "floor-vinyl",
-    category: "Flooring",
+    category: "Window",
     name: "Luxury Vinyl Plank",
     price: "$15/sq ft",
     tier: "economic",
-    imageUrl: "https://images.unsplash.com/photo-1620626011761-9963d7521576?q=80&w=500",
+    imageUrl: "/src/app/assets/window_silver.png",
+    imageUrlGolden: "/src/app/assets/window_gold.png"
   },
-  // Flooring - Luxury
+  // Window - Luxury
   {
     id: "floor-herringbone",
-    category: "Flooring",
+    category: "Window",
     name: "Herringbone Porcelain",
     price: "$35/sq ft",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?q=80&w=500",
+    imageUrl: "/src/app/assets/window_silver.png",
+    imageUrlGolden: "/src/app/assets/window_gold.png"
   },
   {
     id: "floor-slate",
-    category: "Flooring",
+    category: "Window",
     name: "Premium Slate Tile",
     price: "$45/sq ft",
     tier: "luxury",
-    imageUrl: "https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?q=80&w=500",
+    imageUrl: "/src/app/assets/window_silver.png",
+    imageUrlGolden: "/src/app/assets/window_gold.png"
   },
 ];
 
@@ -157,6 +174,9 @@ export function ProductConfiguration() {
   const { selections, updateSelections } = useDesign();
   const [selectedProducts, setSelectedProducts] = useState<{
     [key: string]: string;
+  }>({});
+  const [selectedColors, setSelectedColors] = useState<{
+    [key: string]: "white" | "golden";
   }>({});
   const [categoryTiers, setCategoryTiers] = useState<{
     [key: string]: "economic" | "luxury";
@@ -192,9 +212,32 @@ export function ProductConfiguration() {
   };
 
   const handleProductSelect = (category: string, productId: string) => {
-    setSelectedProducts((prev) => ({
+    setSelectedProducts((prev) => {
+      // If clicking the same product, deselect it
+      if (prev[category] === productId) {
+        const newSelections = { ...prev };
+        delete newSelections[category];
+        return newSelections;
+      }
+      // Otherwise, select the new product
+      return {
+        ...prev,
+        [category]: productId,
+      };
+    });
+    // Set default color to white when product is selected
+    if (!selectedColors[productId]) {
+      setSelectedColors((prev) => ({
+        ...prev,
+        [productId]: "white",
+      }));
+    }
+  };
+
+  const handleColorSelect = (productId: string, color: "white" | "golden") => {
+    setSelectedColors((prev) => ({
       ...prev,
-      [category]: productId,
+      [productId]: color,
     }));
   };
 
@@ -219,23 +262,51 @@ export function ProductConfiguration() {
           price: product?.price,
           tier: product?.tier,
         };
-      }
+      },
     );
+
+    // Save selected products with their images and colors
+    const selectedProductsData: {
+      [category: string]: {
+        id: string;
+        name: string;
+        imageUrl: string;
+        color: "white" | "golden";
+      };
+    } = {};
+
+    Object.entries(selectedProducts).forEach(([category, productId]) => {
+      const product = SKU_OPTIONS.find((s) => s.id === productId);
+      const color = selectedColors[productId] || "white";
+      const imageUrl = color === "golden" && product?.imageUrlGolden
+        ? product.imageUrlGolden
+        : product?.imageUrl || "";
+
+      if (product) {
+        selectedProductsData[category] = {
+          id: productId,
+          name: product.name,
+          imageUrl,
+          color,
+        };
+      }
+    });
 
     updateSelections({
       visualizer: {
-        wallFinish: products.find((p) => p.category === "Wall Tiles")?.name || "",
+        wallFinish: products.find((p) => p.category === "Curtains")?.name || "",
         tubStyle: products.find((p) => p.category === "Bathtub")?.name || "",
         fixture: products.find((p) => p.category === "Fixtures")?.name || "",
-        flooring: products.find((p) => p.category === "Flooring")?.name || "",
+        flooring: products.find((p) => p.category === "Window")?.name || "",
       },
+      selectedProductsData,
     });
 
     navigate("/result");
   };
 
   const allCategoriesSelected = categories.every(
-    (category) => selectedProducts[category]
+    (category) => selectedProducts[category],
   );
 
   // Always allow continuing, unless generating
@@ -249,14 +320,20 @@ export function ProductConfiguration() {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-8">
               <div className="flex flex-col">
-                <span className="text-[10px] font-bold text-[#2A9D8F] tracking-[0.2em] uppercase">Step 04</span>
-                <h1 className="text-xl font-bold text-[#1A3A52]">Product Configuration</h1>
+                <span className="text-[10px] font-bold text-[#2A9D8F] tracking-[0.2em] uppercase">
+                  Step 04
+                </span>
+                <h1 className="text-xl font-bold text-[#1A3A52]">
+                  Product Configuration
+                </h1>
               </div>
               <div className="h-8 w-[1px] bg-gray-200 hidden md:block" />
-              <p className="text-sm text-[#6B6B6B] hidden md:block italic">Customize your bathroom with premium selections</p>
+              <p className="text-sm text-[#6B6B6B] hidden md:block italic">
+                Customize your bathroom with premium selections
+              </p>
             </div>
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => navigate(-1)}
                 className="text-sm font-bold text-[#1A3A52] hover:underline"
               >
@@ -276,7 +353,7 @@ export function ProductConfiguration() {
               {categories.map((category) => {
                 const currentTier = categoryTiers[category] || "economic";
                 const filteredProducts = SKU_OPTIONS.filter(
-                  (s) => s.category === category && s.tier === currentTier
+                  (s) => s.category === category && s.tier === currentTier,
                 );
 
                 return (
@@ -307,9 +384,9 @@ export function ProductConfiguration() {
                               : "text-[#6B6B6B] hover:bg-gray-50"
                           }`}
                         >
-                          {currentTier === "luxury" && (
+                          {/* {currentTier === "luxury" && (
                             <Sparkles className="w-3 h-3" />
-                          )}
+                          )} */}
                           Luxury
                         </button>
                       </div>
@@ -325,6 +402,12 @@ export function ProductConfiguration() {
                       {filteredProducts.map((product) => {
                         const isSelected =
                           selectedProducts[category] === product.id;
+                        const selectedColor =
+                          selectedColors[product.id] || "white";
+                        const displayImageUrl =
+                          selectedColor === "golden" && product.imageUrlGolden
+                            ? product.imageUrlGolden
+                            : product.imageUrl;
 
                         return (
                           <button
@@ -340,23 +423,63 @@ export function ProductConfiguration() {
                           >
                             <div className="aspect-square w-full rounded-lg overflow-hidden bg-gray-100 mb-2 relative">
                               <img
-                                src={product.imageUrl}
+                                src={displayImageUrl}
                                 alt={product.name}
                                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                               />
                               {isSelected && (
-                                <div className="absolute top-1 right-1 bg-[#2A9D8F] rounded-full p-0.5 shadow-sm z-10">
-                                  <Check className="w-3 h-3 text-white" />
-                                </div>
+                                <button
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleProductSelect(category, product.id);
+                                  }}
+                                  className="absolute top-1 right-1 bg-[#2A9D8F] hover:bg-[#1A3A52] rounded-full p-[1px] shadow-sm z-10 transition-colors"
+                                  title="Deselect"
+                                >
+                                  <X className="w-3 h-3 text-white" />
+                                </button>
                               )}
                             </div>
                             <div className="px-1">
                               <p className="text-xs font-bold text-[#1A3A52] line-clamp-2 leading-tight mb-1">
                                 {product.name}
                               </p>
-                              <p className="text-[10px] text-[#2A9D8F] font-bold">
+                              <p className="text-[10px] text-[#2A9D8F] font-bold mb-2">
                                 {product.price}
                               </p>
+
+                              {/* Color Selection */}
+                              <div className="flex items-center gap-2">
+                                <span className="text-[9px] text-[#6B6B6B] font-medium">
+                                  Color:
+                                </span>
+                                <div className="flex gap-1.5">
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleColorSelect(product.id, "white");
+                                    }}
+                                    className={`w-4 h-4 rounded-full bg-gradient-to-br from-[#ffffff] to-[#f4f3f0] border-1 transition-all ${
+                                      selectedColors[product.id] === "white"
+                                        ? "border-[#2A9D8F] ring-2 ring-[#2A9D8F]/30"
+                                        : "border-gray-300 hover:border-gray-400"
+                                    }`}
+                                    title="White"
+                                  />
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleColorSelect(product.id, "golden");
+                                    }}
+                                    className={`w-4 h-4 rounded-full bg-gradient-to-br from-[#FEFAE6] to-[#DACFAB] border-1 transition-all ${
+                                      selectedColors[product.id] === "golden"
+                                        ? "border-[#2A9D8F] ring-2 ring-[#2A9D8F]/30"
+                                        : "border-[#d5ccb5] hover:border-[#c1b390]"
+                                    }`}
+                                    title="Golden"
+                                  />
+                                </div>
+                              </div>
                             </div>
                           </button>
                         );
@@ -370,10 +493,14 @@ export function ProductConfiguration() {
 
           {/* Right Panel - Preview (75%) */}
           <div className="lg:col-span-9 bg-white p-8 flex flex-col relative">
-            <div className="flex items-center justify-between mb-8">
+            <div className="flex items-center justify-between mb-4">
               <div>
-                <h2 className="text-2xl font-bold text-[#1A3A52]">Design Preview</h2>
-                <p className="text-[#6B6B6B] text-sm">Real-time visualization of your selections</p>
+                <h2 className="text-[20px] font-bold text-[#1A3A52]">
+                  Design Preview
+                </h2>
+                <p className="text-[#6B6B6B] text-[12px]">
+                  Real-time visualization of your selections
+                </p>
               </div>
 
               {/* Generate/Regenerate button - ONLY for uploaded images */}
@@ -395,7 +522,11 @@ export function ProductConfiguration() {
                   ) : (
                     <>
                       <Sparkles className="w-5 h-5" />
-                      <span>{hasGenerated ? "Regenerate AI Preview" : "Generate AI Preview"}</span>
+                      <span>
+                        {hasGenerated
+                          ? "Regenerate AI Preview"
+                          : "Generate AI Preview"}
+                      </span>
                     </>
                   )}
                 </button>
@@ -403,7 +534,7 @@ export function ProductConfiguration() {
             </div>
 
             {/* Preview Area */}
-            <div className="flex-1 relative rounded-3xl overflow-hidden bg-[#F5F4F0] shadow-2xl mb-8 group">
+            <div className="flex-1 relative rounded-3xl overflow-hidden bg-[#F5F4F0] shadow-2xl mb-4 group">
               <div className="absolute inset-0">
                 {isGenerating ? (
                   <div className="w-full h-full flex flex-col items-center justify-center bg-[#F5F4F0]">
@@ -411,8 +542,12 @@ export function ProductConfiguration() {
                       <div className="w-20 h-20 border-4 border-[#2A9D8F]/20 border-t-[#2A9D8F] rounded-full animate-spin mb-6"></div>
                       <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-[#2A9D8F]" />
                     </div>
-                    <p className="text-xl font-bold text-[#1A3A52]">Applying your choices...</p>
-                    <p className="text-[#6B6B6B]">This will only take a few moments</p>
+                    <p className="text-xl font-bold text-[#1A3A52]">
+                      Applying your choices...
+                    </p>
+                    <p className="text-[#6B6B6B]">
+                      This will only take a few moments
+                    </p>
                   </div>
                 ) : (
                   <motion.div
@@ -420,22 +555,150 @@ export function ProductConfiguration() {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ duration: 0.5 }}
-                    className="w-full h-full"
+                    className="w-full h-full flex justify-center items-center relative"
                   >
-                    <img
-                      src="https://images.unsplash.com/photo-1700074817207-c55fc074a562?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBtb2Rlcm4lMjBiYXRocm9vbSUyMGJlZm9yZSUyMGFmdGVyJTIwcmVub3ZhdGlvbiUyMHJlbW9kZWx8ZW58MXx8fHwxNzc1MTMyMzU2fDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                      alt="Bathroom Preview"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    
+                    {/* Container with fixed aspect ratio */}
+                    <div className="relative inline-block">
+                      {/* Background Image - Relative Container */}
+                      <img
+                        src="/src/app/assets/staticBG.png"
+                        alt="Bathroom Preview"
+                        className="object-contain block"
+                        style={{ width: '1000px', height: '475px' }}
+                      />
+
+                      {/* Overlay Selected Bathtub */}
+                      {selectedProducts["Bathtub"] && (() => {
+                        const selectedBathtub = SKU_OPTIONS.find(
+                          (s) => s.id === selectedProducts["Bathtub"]
+                        );
+                        const selectedColor = selectedColors[selectedProducts["Bathtub"]] || "white";
+                        const bathtubImageUrl = selectedColor === "golden" && selectedBathtub?.imageUrlGolden
+                          ? selectedBathtub.imageUrlGolden
+                          : selectedBathtub?.imageUrl;
+
+                        return (
+                          <motion.img
+                            key={selectedProducts["Bathtub"] + selectedColor}
+                            initial={{ opacity: 0, scale: 0.9 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ duration: 0.4 }}
+                            src={bathtubImageUrl}
+                            alt="Selected Bathtub"
+                            className="absolute pointer-events-none object-contain"
+                            style={{
+                              top: '-19%',
+                              left: '14.5%',
+                              width: '71.5%',
+                              height: 'auto'
+                            }}
+                          />
+                        );
+                      })()}
+
+                          {/* Overlay Selected Fixtures */}
+                          {selectedProducts["Fixtures"] && (() => {
+                            const selectedFixture = SKU_OPTIONS.find(
+                              (s) => s.id === selectedProducts["Fixtures"]
+                            );
+                            const selectedColor = selectedColors[selectedProducts["Fixtures"]] || "white";
+                            const fixtureImageUrl = selectedColor === "golden" && selectedFixture?.imageUrlGolden
+                              ? selectedFixture.imageUrlGolden
+                              : selectedFixture?.imageUrl;
+
+                            return (
+                              <motion.img
+                                key={selectedProducts["Fixtures"] + selectedColor}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                src={fixtureImageUrl}
+                                alt="Selected Fixture"
+                                className="absolute pointer-events-none object-contain"
+                                style={{
+                                  top: '-10%',
+                                  right: '17%',
+                                  width: '60%',
+                                  height: 'auto'
+                                }}
+                              />
+                            );
+                          })()}
+
+                          {/* Overlay Selected Curtains */}
+                          {selectedProducts["Curtains"] && (() => {
+                            const selectedCurtain = SKU_OPTIONS.find(
+                              (s) => s.id === selectedProducts["Curtains"]
+                            );
+                            const selectedColor = selectedColors[selectedProducts["Curtains"]] || "white";
+                            const curtainImageUrl = selectedColor === "golden" && selectedCurtain?.imageUrlGolden
+                              ? selectedCurtain.imageUrlGolden
+                              : selectedCurtain?.imageUrl;
+
+                            return (
+                              <motion.img
+                                key={selectedProducts["Curtains"] + selectedColor}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                src={curtainImageUrl}
+                                alt="Selected Curtain"
+                                className="absolute pointer-events-none object-contain"
+                                style={{
+                                  top: '-14%',
+                                  left: '14.5%',
+                                  width: '71%',
+                                  height: 'auto',
+                                  zIndex: 5
+                                }}
+                              />
+                            );
+                          })()}
+
+                          {/* Overlay Selected Window */}
+                          {selectedProducts["Window"] && (() => {
+                            const selectedWindow = SKU_OPTIONS.find(
+                              (s) => s.id === selectedProducts["Window"]
+                            );
+                            const selectedColor = selectedColors[selectedProducts["Window"]] || "white";
+                            const windowImageUrl = selectedColor === "golden" && selectedWindow?.imageUrlGolden
+                              ? selectedWindow.imageUrlGolden
+                              : selectedWindow?.imageUrl;
+
+                            return (
+                              <motion.img
+                                key={selectedProducts["Window"] + selectedColor}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                src={windowImageUrl}
+                                alt="Selected Window"
+                                className="absolute pointer-events-none object-contain"
+                                style={{
+                                  top: '-10%',
+                                  left: '14.6%',
+                                  width: '71%',
+                                  height: 'auto',
+                                  zIndex: 10
+                                }}
+                              />
+                            );
+                          })()}
+                    </div>
+
                     {/* Overlay for uploaded image prompt */}
                     {isUploadedImage && !hasGenerated && (
                       <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px] flex items-center justify-center">
                         <div className="bg-white/90 backdrop-blur-md p-8 rounded-2xl text-center max-w-sm shadow-2xl">
                           <Sparkles className="w-10 h-10 text-[#2A9D8F] mx-auto mb-4" />
-                          <h3 className="text-xl font-bold text-[#1A3A52] mb-2">Ready to Visualize</h3>
-                          <p className="text-sm text-[#6B6B6B] mb-6">Select your products then click Generate to see them in your space.</p>
-                          <button 
+                          <h3 className="text-xl font-bold text-[#1A3A52] mb-2">
+                            Ready to Visualize
+                          </h3>
+                          <p className="text-sm text-[#6B6B6B] mb-6">
+                            Select your products then click Generate to see them
+                            in your space.
+                          </p>
+                          <button
                             onClick={handleGenerate}
                             className="w-full py-3 bg-[#2A9D8F] text-white rounded-xl font-bold"
                           >
@@ -454,24 +717,37 @@ export function ProductConfiguration() {
               <div className="flex-1">
                 {Object.keys(selectedProducts).length > 0 ? (
                   <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
-                    {Object.entries(selectedProducts).map(([category, productId]) => {
-                      const product = SKU_OPTIONS.find(s => s.id === productId);
-                      return (
-                        <div key={category} className="flex-shrink-0 bg-[#F5F4F0] px-4 py-2 rounded-full border border-[#E8E6E1] flex items-center gap-2">
-                          <span className="text-[10px] font-bold text-[#2A9D8F] uppercase">{category}</span>
-                          <span className="text-xs font-bold text-[#1A3A52]">{product?.name}</span>
-                        </div>
-                      );
-                    })}
+                    {Object.entries(selectedProducts).map(
+                      ([category, productId]) => {
+                        const product = SKU_OPTIONS.find(
+                          (s) => s.id === productId,
+                        );
+                        return (
+                          <div
+                            key={category}
+                            className="flex-shrink-0 bg-[#F5F4F0] px-4 py-2 rounded-full border border-[#E8E6E1] flex items-center gap-2"
+                          >
+                            <span className="text-[10px] font-bold text-[#2A9D8F] uppercase">
+                              {category}
+                            </span>
+                            <span className="text-xs font-bold text-[#1A3A52]">
+                              {product?.name}
+                            </span>
+                          </div>
+                        );
+                      },
+                    )}
                   </div>
                 ) : (
-                  <p className="text-sm text-[#6B6B6B]">Select products from the left to begin your customization.</p>
+                  <p className="text-[12px] text-[#6B6B6B]">
+                    Select products from the left to begin your customization.
+                  </p>
                 )}
               </div>
-              
+
               <button
                 onClick={handleContinue}
-                className="flex items-center gap-3 px-10 py-5 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-lg shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0"
+                className="flex items-center gap-3 px-6 py-3 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-[16px] shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0"
               >
                 <span>View Final Design</span>
                 <ArrowRight className="w-6 h-6" />

@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { Download, Mail, Link2, RefreshCw, Check, X, User, Phone } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 import { useNavigate } from "react-router";
-
+//ewfrsdkljsfzc
 export function FinalResult() {
   const { selections } = useDesign();
   const navigate = useNavigate();
@@ -84,14 +84,97 @@ export function FinalResult() {
           transition={{ delay: 0.2, duration: 0.6 }}
           className="relative mb-12"
         >
-          {/* Image Container */}
+          {/* Image Container with fixed aspect ratio */}
           <div className="relative rounded-3xl overflow-hidden shadow-[0_8px_40px_rgba(0,0,0,0.08)] bg-[#F5F4F0] p-3">
-            <div className="rounded-2xl overflow-hidden">
-              <img
-                src="https://images.unsplash.com/photo-1700074817217-65c4191d5f9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxsdXh1cnklMjBiYXRocm9vbSUyMGZpbmFsJTIwcmVzdWx0fGVufDF8fHx8MTc3NTEyNzA1Mnww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Your Custom Bathroom Design"
-                className="w-full h-auto"
-              />
+            <div className="rounded-2xl overflow-hidden relative" style={{ aspectRatio: '16/9' }}>
+              <div className="absolute inset-0">
+                <div className="w-full h-full flex justify-center items-center relative">
+                  {/* Container with fixed aspect ratio */}
+                  <div className="relative inline-block">
+                    {/* Background Image - Relative Container */}
+                    <img
+                      src="/src/app/assets/staticBG.png"
+                      alt="Your Custom Bathroom Design"
+                      className="object-contain block"
+                      style={{ width: '1000px', height: '475px' }}
+                    />
+
+                    {/* Overlay Selected Bathtub */}
+                    {selections.selectedProductsData?.["Bathtub"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.3 }}
+                        src={selections.selectedProductsData["Bathtub"].imageUrl}
+                        alt="Selected Bathtub"
+                        className="absolute pointer-events-none object-contain"
+                        style={{
+                          top: '-19%',
+                          left: '14.5%',
+                          width: '71.5%',
+                          height: 'auto'
+                        }}
+                      />
+                    )}
+
+                    {/* Overlay Selected Fixtures */}
+                    {selections.selectedProductsData?.["Fixtures"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.4 }}
+                        src={selections.selectedProductsData["Fixtures"].imageUrl}
+                        alt="Selected Fixture"
+                        className="absolute pointer-events-none object-contain"
+                        style={{
+                          top: '-10%',
+                          right: '17%',
+                          width: '60%',
+                          height: 'auto'
+                        }}
+                      />
+                    )}
+
+                    {/* Overlay Selected Curtains */}
+                    {selections.selectedProductsData?.["Curtains"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.5 }}
+                        src={selections.selectedProductsData["Curtains"].imageUrl}
+                        alt="Selected Curtain"
+                        className="absolute pointer-events-none object-contain"
+                        style={{
+                          top: '-14%',
+                          left: '14.5%',
+                          width: '71%',
+                          height: 'auto',
+                          zIndex: 5
+                        }}
+                      />
+                    )}
+
+                    {/* Overlay Selected Window */}
+                    {selections.selectedProductsData?.["Window"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.6 }}
+                        src={selections.selectedProductsData["Window"].imageUrl}
+                        alt="Selected Window"
+                        className="absolute pointer-events-none object-contain"
+                        style={{
+                          top: '-10%',
+                          left: '14.6%',
+                          width: '71%',
+                          height: 'auto',
+                          zIndex: 10
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </motion.div>
