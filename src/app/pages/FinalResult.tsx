@@ -93,7 +93,7 @@ export function FinalResult() {
                   <div className="relative inline-block">
                     {/* Background Image - Relative Container */}
                     <img
-                      src="/src/app/assets/staticBG.png"
+                      src="/assets/staticBG.png"
                       alt="Your Custom Bathroom Design"
                       className="object-contain block"
                       style={{ width: '1000px', height: '475px' }}

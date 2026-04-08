@@ -22,8 +22,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Classic Alcove Tub",
     price: "$1,299",
     tier: "economic",
-    imageUrl: "/src/app/assets/bathtub1_white.png",
-    imageUrlGolden: "/src/app/assets/bathtub1_ivory.png",
+    imageUrl: "/assets/bathtub1_white.png",
+    imageUrlGolden: "/assets/bathtub1_ivory.png",
   },
   {
     id: "tub-standard",
@@ -31,8 +31,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Standard Soaking Tub",
     price: "$1,799",
     tier: "economic",
-    imageUrl: "/src/app/assets/bathtub2_white.png",
-    imageUrlGolden: "/src/app/assets/bathtub2_ivory.png",
+    imageUrl: "/assets/bathtub2_white.png",
+    imageUrlGolden: "/assets/bathtub2_ivory.png",
   },
   // Bathtubs - Luxury
   {
@@ -41,8 +41,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Modern Freestanding Tub",
     price: "$2,499",
     tier: "luxury",
-    imageUrl: "/src/app/assets/bathtub1_white.png",
-    imageUrlGolden: "/src/app/assets/bathtub1_ivory.png",
+    imageUrl: "/assets/bathtub1_white.png",
+    imageUrlGolden: "/assets/bathtub1_ivory.png",
   },
   {
     id: "tub-luxury",
@@ -50,8 +50,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Luxury Soaking Tub",
     price: "$3,999",
     tier: "luxury",
-    imageUrl: "/src/app/assets/bathtub2_white.png",
-    imageUrlGolden: "/src/app/assets/bathtub2_ivory.png",
+    imageUrl: "/assets/bathtub2_white.png",
+    imageUrlGolden: "/assets/bathtub2_ivory.png",
   },
   // Fixtures - Economic
   {
@@ -60,8 +60,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Chrome Faucet Set",
     price: "$299",
     tier: "economic",
-    imageUrl: "/src/app/assets/shower2_silver.png",
-    imageUrlGolden: "/src/app/assets/shower2_gold.png"
+    imageUrl: "/assets/shower2_silver.png",
+    imageUrlGolden: "/assets/shower2_gold.png"
   },
   {
     id: "fixture-nickel",
@@ -69,8 +69,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Brushed Nickel Set",
     price: "$349",
     tier: "economic",
-    imageUrl: "/src/app/assets/shower1_silver.png",
-    imageUrlGolden: "/src/app/assets/shower1_gold.png"
+    imageUrl: "/assets/shower1_silver.png",
+    imageUrlGolden: "/assets/shower1_gold.png"
   },
   // Fixtures - Luxury
   {
@@ -79,8 +79,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Brass Faucet Set",
     price: "$449",
     tier: "luxury",
-    imageUrl: "/src/app/assets/shower2_silver.png",
-    imageUrlGolden: "/src/app/assets/shower2_gold.png"
+    imageUrl: "/assets/shower2_silver.png",
+    imageUrlGolden: "/assets/shower2_gold.png"
   },
   {
     id: "fixture-black",
@@ -88,8 +88,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Matte Black Faucet Set",
     price: "$599",
     tier: "luxury",
-    imageUrl: "/src/app/assets/shower1_silver.png",
-    imageUrlGolden: "/src/app/assets/shower1_gold.png"
+    imageUrl: "/assets/shower1_silver.png",
+    imageUrlGolden: "/assets/shower1_gold.png"
   },
   // Curtains - Economic
   {
@@ -98,8 +98,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Gray Ceramic Tiles",
     price: "$45/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/curtains_silver.png",
-    imageUrlGolden: "/src/app/assets/curtains_golden.png"
+    imageUrl: "/assets/curtains_silver.png",
+    imageUrlGolden: "/assets/curtains_golden.png"
   },
   {
     id: "tile-subway",
@@ -107,8 +107,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Classic Subway Tiles",
     price: "$55/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/curtains_silver.png",
-    imageUrlGolden: "/src/app/assets/curtains_golden.png"
+    imageUrl: "/assets/curtains_silver.png",
+    imageUrlGolden: "/assets/curtains_golden.png"
   },
   // Curtains - Luxury
   {
@@ -117,8 +117,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "White Marble Tiles",
     price: "$89/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/curtains_silver.png",
-    imageUrlGolden: "/src/app/assets/curtains_golden.png"
+    imageUrl: "/assets/curtains_silver.png",
+    imageUrlGolden: "/assets/curtains_golden.png"
   },
   {
     id: "tile-stone",
@@ -126,8 +126,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Natural Stone Tiles",
     price: "$129/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/curtains_silver.png",
-    imageUrlGolden: "/src/app/assets/curtains_golden.png"
+    imageUrl: "/assets/curtains_silver.png",
+    imageUrlGolden: "/assets/curtains_golden.png"
   },
   // Window - Economic
   {
@@ -136,8 +136,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Waterproof Laminate",
     price: "$12/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/window_silver.png",
-    imageUrlGolden: "/src/app/assets/window_gold.png"
+    imageUrl: "/assets/window_silver.png",
+    imageUrlGolden: "/assets/window_gold.png"
   },
   {
     id: "floor-vinyl",
@@ -145,8 +145,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Luxury Vinyl Plank",
     price: "$15/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/window_silver.png",
-    imageUrlGolden: "/src/app/assets/window_gold.png"
+    imageUrl: "/assets/window_silver.png",
+    imageUrlGolden: "/assets/window_gold.png"
   },
   // Window - Luxury
   {
@@ -155,8 +155,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Herringbone Porcelain",
     price: "$35/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/window_silver.png",
-    imageUrlGolden: "/src/app/assets/window_gold.png"
+    imageUrl: "/assets/window_silver.png",
+    imageUrlGolden: "/assets/window_gold.png"
   },
   {
     id: "floor-slate",
@@ -164,8 +164,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Premium Slate Tile",
     price: "$45/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/window_silver.png",
-    imageUrlGolden: "/src/app/assets/window_gold.png"
+    imageUrl: "/assets/window_silver.png",
+    imageUrlGolden: "/assets/window_gold.png"
   },
 ];
 
@@ -561,7 +561,7 @@ export function ProductConfiguration() {
                     <div className="relative inline-block">
                       {/* Background Image - Relative Container */}
                       <img
-                        src="/src/app/assets/staticBG.png"
+                        src="/assets/staticBG.png"
                         alt="Bathroom Preview"
                         className="object-contain block"
                         style={{ width: '1000px', height: '475px' }}
