@@ -20,6 +20,14 @@ interface DesignSelections {
     fixture: string;
     flooring: string;
   };
+  selectedProductsData?: {
+    [category: string]: {
+      id: string;
+      name: string;
+      imageUrl: string;
+      color: "white" | "golden";
+    };
+  };
 }
 
 interface DesignContextType {
