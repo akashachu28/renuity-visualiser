@@ -167,6 +167,82 @@ const SKU_OPTIONS: SKUOption[] = [
     imageUrl: "/assets/window_silver.png",
     imageUrlGolden: "/assets/window_gold.png"
   },
+  // Wall - Economic
+  {
+    id: "wall-classic",
+    category: "Wall",
+    name: "Classic Wall Finish",
+    price: "$25/sq ft",
+    tier: "economic",
+    imageUrl: "/src/app/assets/wall1.png",
+    imageUrlGolden: "/src/app/assets/wall1Gold.png"
+  },
+  {
+    id: "wall-modern",
+    category: "Wall",
+    name: "Modern Wall Finish",
+    price: "$35/sq ft",
+    tier: "economic",
+    imageUrl: "/src/app/assets/wall2.png",
+    imageUrlGolden: "/src/app/assets/wall2Gold.png"
+  },
+  // Wall - Luxury
+  {
+    id: "wall-premium",
+    category: "Wall",
+    name: "Premium Wall Finish",
+    price: "$55/sq ft",
+    tier: "luxury",
+    imageUrl: "/src/app/assets/wall1.png",
+    imageUrlGolden: "/src/app/assets/wall1Gold.png"
+  },
+  {
+    id: "wall-designer",
+    category: "Wall",
+    name: "Designer Wall Finish",
+    price: "$75/sq ft",
+    tier: "luxury",
+    imageUrl: "/src/app/assets/wall2.png",
+    imageUrlGolden: "/src/app/assets/wall2Gold.png"
+  },
+  // Ceiling - Economic
+  {
+    id: "ceiling-standard",
+    category: "Ceiling",
+    name: "Standard Ceiling",
+    price: "$18/sq ft",
+    tier: "economic",
+    imageUrl: "/src/app/assets/top.png",
+    imageUrlGolden: "/src/app/assets/topGold.png"
+  },
+  {
+    id: "ceiling-smooth",
+    category: "Ceiling",
+    name: "Smooth Ceiling",
+    price: "$22/sq ft",
+    tier: "economic",
+    imageUrl: "/src/app/assets/top.png",
+    imageUrlGolden: "/src/app/assets/topGold.png"
+  },
+  // Ceiling - Luxury
+  {
+    id: "ceiling-premium",
+    category: "Ceiling",
+    name: "Premium Ceiling",
+    price: "$38/sq ft",
+    tier: "luxury",
+    imageUrl: "/src/app/assets/top.png",
+    imageUrlGolden: "/src/app/assets/topGold.png"
+  },
+  {
+    id: "ceiling-designer",
+    category: "Ceiling",
+    name: "Designer Ceiling",
+    price: "$52/sq ft",
+    tier: "luxury",
+    imageUrl: "/src/app/assets/top.png",
+    imageUrlGolden: "/src/app/assets/topGold.png"
+  },
 ];
 
 export function ProductConfiguration() {
@@ -595,7 +671,8 @@ export function ProductConfiguration() {
                               top: '-19%',
                               left: '14.5%',
                               width: '71.5%',
-                              height: 'auto'
+                              height: 'auto',
+                              zIndex: 2
                             }}
                           />
                         );
@@ -619,12 +696,14 @@ export function ProductConfiguration() {
                                 transition={{ duration: 0.4 }}
                                 src={fixtureImageUrl}
                                 alt="Selected Fixture"
-                                className="absolute pointer-events-none object-contain"
+                                className="absolute pointer-events-none"
                                 style={{
-                                  top: '-10%',
-                                  right: '17%',
-                                  width: '60%',
-                                  height: 'auto'
+                                  top: '0%',
+                                  right: '15%',
+                                  width: '70%',
+                                  height: '90%',
+                                  zIndex: 2,
+                                  objectFit: 'fill'
                                 }}
                               />
                             );
@@ -678,13 +757,76 @@ export function ProductConfiguration() {
                                 transition={{ duration: 0.4 }}
                                 src={windowImageUrl}
                                 alt="Selected Door"
-                                className="absolute pointer-events-none object-contain"
+                                className="absolute pointer-events-none"
                                 style={{
-                                  top: '-10%',
+                                  top: '-3%',
                                   left: '14.6%',
                                   width: '71%',
-                                  height: 'auto',
+                                  height: '95%',
+                                  objectFit: 'fill',
                                   zIndex: 10
+                                }}
+                              />
+                            );
+                          })()}
+
+                          {/* Overlay Selected Wall */}
+                          {selectedProducts["Wall"] && (() => {
+                            const selectedWall = SKU_OPTIONS.find(
+                              (s) => s.id === selectedProducts["Wall"]
+                            );
+                            const selectedColor = selectedColors[selectedProducts["Wall"]] || "white";
+                            const wallImageUrl = selectedColor === "golden" && selectedWall?.imageUrlGolden
+                              ? selectedWall.imageUrlGolden
+                              : selectedWall?.imageUrl;
+
+                            return (
+                              <motion.img
+                                key={selectedProducts["Wall"] + selectedColor}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                src={wallImageUrl}
+                                alt="Selected Wall"
+                                className="absolute pointer-events-none"
+                                style={{
+                                  top: '0%',
+                                  left: '14.8%',
+                                  width: '71%',
+                                  height: '96%',
+                                  objectFit: 'fill',
+                                  zIndex: 1
+                                }}
+                              />
+                            );
+                          })()}
+
+                          {/* Overlay Selected Ceiling */}
+                          {selectedProducts["Ceiling"] && (() => {
+                            const selectedCeiling = SKU_OPTIONS.find(
+                              (s) => s.id === selectedProducts["Ceiling"]
+                            );
+                            const selectedColor = selectedColors[selectedProducts["Ceiling"]] || "white";
+                            const ceilingImageUrl = selectedColor === "golden" && selectedCeiling?.imageUrlGolden
+                              ? selectedCeiling.imageUrlGolden
+                              : selectedCeiling?.imageUrl;
+
+                            return (
+                              <motion.img
+                                key={selectedProducts["Ceiling"] + selectedColor}
+                                initial={{ opacity: 0, scale: 0.9 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                transition={{ duration: 0.4 }}
+                                src={ceilingImageUrl}
+                                alt="Selected Ceiling"
+                                className="absolute pointer-events-none"
+                                style={{
+                                  top: '-3%',
+                                  left: '14.8%',
+                                  width: '71%',
+                                  height: 'auto',
+                                  objectFit: 'contain',
+                                  zIndex: 1
                                 }}
                               />
                             );
