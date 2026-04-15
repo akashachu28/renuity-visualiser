@@ -174,8 +174,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Classic Wall Finish",
     price: "$25/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/wall1.png",
-    imageUrlGolden: "/src/app/assets/wall1Gold.png"
+    imageUrl: "/assets/wall1.png",
+    imageUrlGolden: "/assets/wall1Gold.png"
   },
   {
     id: "wall-modern",
@@ -183,8 +183,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Modern Wall Finish",
     price: "$35/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/wall2.png",
-    imageUrlGolden: "/src/app/assets/wall2Gold.png"
+    imageUrl: "/assets/wall2.png",
+    imageUrlGolden: "/assets/wall2Gold.png"
   },
   // Wall - Luxury
   {
@@ -193,8 +193,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Premium Wall Finish",
     price: "$55/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/wall1.png",
-    imageUrlGolden: "/src/app/assets/wall1Gold.png"
+    imageUrl: "/assets/wall1.png",
+    imageUrlGolden: "/assets/wall1Gold.png"
   },
   {
     id: "wall-designer",
@@ -202,8 +202,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Designer Wall Finish",
     price: "$75/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/wall2.png",
-    imageUrlGolden: "/src/app/assets/wall2Gold.png"
+    imageUrl: "/assets/wall2.png",
+    imageUrlGolden: "/assets/wall2Gold.png"
   },
   // Ceiling - Economic
   {
@@ -212,8 +212,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Standard Ceiling",
     price: "$18/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/top.png",
-    imageUrlGolden: "/src/app/assets/topGold.png"
+    imageUrl: "/assets/top.png",
+    imageUrlGolden: "/assets/topGold.png"
   },
   {
     id: "ceiling-smooth",
@@ -221,8 +221,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Smooth Ceiling",
     price: "$22/sq ft",
     tier: "economic",
-    imageUrl: "/src/app/assets/top.png",
-    imageUrlGolden: "/src/app/assets/topGold.png"
+    imageUrl: "/assets/top.png",
+    imageUrlGolden: "/assets/topGold.png"
   },
   // Ceiling - Luxury
   {
@@ -231,8 +231,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Premium Ceiling",
     price: "$38/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/top.png",
-    imageUrlGolden: "/src/app/assets/topGold.png"
+    imageUrl: "/assets/top.png",
+    imageUrlGolden: "/assets/topGold.png"
   },
   {
     id: "ceiling-designer",
@@ -240,8 +240,8 @@ const SKU_OPTIONS: SKUOption[] = [
     name: "Designer Ceiling",
     price: "$52/sq ft",
     tier: "luxury",
-    imageUrl: "/src/app/assets/top.png",
-    imageUrlGolden: "/src/app/assets/topGold.png"
+    imageUrl: "/assets/top.png",
+    imageUrlGolden: "/assets/topGold.png"
   },
 ];
 
