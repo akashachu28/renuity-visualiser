@@ -12,6 +12,8 @@ interface SKUOption {
   tier: "economic" | "luxury";
   imageUrl: string;
   imageUrlGolden?: string; // Optional golden/ivory variant
+  thumbnailUrl?: string; // Optional thumbnail for left panel
+  thumbnailUrlGolden?: string; // Optional golden thumbnail
 }
 
 const SKU_OPTIONS: SKUOption[] = [
@@ -175,7 +177,9 @@ const SKU_OPTIONS: SKUOption[] = [
     price: "$25/sq ft",
     tier: "economic",
     imageUrl: "/assets/wall1.png",
-    imageUrlGolden: "/assets/wall1Gold.png"
+    imageUrlGolden: "/assets/wall1Gold.png",
+    thumbnailUrl: "/assets/wallThumb1.png",
+    thumbnailUrlGolden: "/assets/wallThumbGold1.png"
   },
   {
     id: "wall-modern",
@@ -184,7 +188,9 @@ const SKU_OPTIONS: SKUOption[] = [
     price: "$35/sq ft",
     tier: "economic",
     imageUrl: "/assets/wall2.png",
-    imageUrlGolden: "/assets/wall2Gold.png"
+    imageUrlGolden: "/assets/wall2Gold.png",
+    thumbnailUrl: "/assets/wallThumb2.png",
+    thumbnailUrlGolden: "/assets/wallThumbGold2.png"
   },
   // Wall - Luxury
   {
@@ -194,7 +200,9 @@ const SKU_OPTIONS: SKUOption[] = [
     price: "$55/sq ft",
     tier: "luxury",
     imageUrl: "/assets/wall1.png",
-    imageUrlGolden: "/assets/wall1Gold.png"
+    imageUrlGolden: "/assets/wall1Gold.png",
+    thumbnailUrl: "/assets/wallThumb1.png",
+    thumbnailUrlGolden: "/assets/wallThumbGold1.png"
   },
   {
     id: "wall-designer",
@@ -203,7 +211,9 @@ const SKU_OPTIONS: SKUOption[] = [
     price: "$75/sq ft",
     tier: "luxury",
     imageUrl: "/assets/wall2.png",
-    imageUrlGolden: "/assets/wall2Gold.png"
+    imageUrlGolden: "/assets/wall2Gold.png",
+    thumbnailUrl: "/assets/wallThumb2.png",
+    thumbnailUrlGolden: "/assets/wallThumbGold2.png"
   },
   // Ceiling - Economic
   {
@@ -485,10 +495,14 @@ export function ProductConfiguration() {
                           selectedProducts[category] === product.id;
                         const selectedColor =
                           selectedColors[product.id] || "white";
-                        const displayImageUrl =
-                          selectedColor === "golden" && product.imageUrlGolden
-                            ? product.imageUrlGolden
-                            : product.imageUrl;
+                        
+                        // Use thumbnail for display in left panel if available, otherwise use main image
+                        const displayImageUrl = (() => {
+                          if (selectedColor === "golden") {
+                            return product.thumbnailUrlGolden || product.imageUrlGolden || product.imageUrl;
+                          }
+                          return product.thumbnailUrl || product.imageUrl;
+                        })();
 
                         return (
                           <button
