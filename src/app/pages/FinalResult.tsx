@@ -112,7 +112,8 @@ export function FinalResult() {
                           top: '-19%',
                           left: '14.5%',
                           width: '71.5%',
-                          height: 'auto'
+                          height: 'auto',
+                          zIndex: 2
                         }}
                       />
                     )}
@@ -125,12 +126,14 @@ export function FinalResult() {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         src={selections.selectedProductsData["Faucet"].imageUrl}
                         alt="Selected Fixture"
-                        className="absolute pointer-events-none object-contain"
+                        className="absolute pointer-events-none"
                         style={{
-                          top: '-10%',
-                          right: '17%',
-                          width: '60%',
-                          height: 'auto'
+                          top: '0%',
+                          right: '15%',
+                          width: '70%',
+                          height: '90%',
+                          zIndex: 2,
+                          objectFit: 'fill'
                         }}
                       />
                     )}
@@ -162,13 +165,54 @@ export function FinalResult() {
                         transition={{ duration: 0.6, delay: 0.6 }}
                         src={selections.selectedProductsData["Door"].imageUrl}
                         alt="Selected Door"
-                        className="absolute pointer-events-none object-contain"
+                        className="absolute pointer-events-none"
                         style={{
-                          top: '-10%',
+                          top: '-3%',
                           left: '14.6%',
                           width: '71%',
-                          height: 'auto',
+                          height: '95%',
+                          objectFit: 'fill',
                           zIndex: 10
+                        }}
+                      />
+                    )}
+
+                    {/* Overlay Selected Wall */}
+                    {selections.selectedProductsData?.["Wall"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.7 }}
+                        src={selections.selectedProductsData["Wall"].imageUrl}
+                        alt="Selected Wall"
+                        className="absolute pointer-events-none"
+                        style={{
+                          top: '0%',
+                          left: '14.8%',
+                          width: '71%',
+                          height: '96%',
+                          objectFit: 'fill',
+                          zIndex: 1
+                        }}
+                      />
+                    )}
+
+                    {/* Overlay Selected Ceiling */}
+                    {selections.selectedProductsData?.["Ceiling"] && (
+                      <motion.img
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.6, delay: 0.8 }}
+                        src={selections.selectedProductsData["Ceiling"].imageUrl}
+                        alt="Selected Ceiling"
+                        className="absolute pointer-events-none"
+                        style={{
+                          top: '-3%',
+                          left: '14.8%',
+                          width: '71%',
+                          height: 'auto',
+                          objectFit: 'contain',
+                          zIndex: 1
                         }}
                       />
                     )}
@@ -246,6 +290,26 @@ export function FinalResult() {
                   <p className="text-sm text-[#6B6B6B] mb-2">Door</p>
                   <p className="text-lg font-medium text-[#1A3A52]">
                     {selections.visualizer.flooring}
+                  </p>
+                </div>
+              )}
+
+              {/* Wall */}
+              {selections.selectedProductsData?.["Wall"] && (
+                <div>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Wall</p>
+                  <p className="text-lg font-medium text-[#1A3A52]">
+                    {selections.selectedProductsData["Wall"].name}
+                  </p>
+                </div>
+              )}
+
+              {/* Ceiling */}
+              {selections.selectedProductsData?.["Ceiling"] && (
+                <div>
+                  <p className="text-sm text-[#6B6B6B] mb-2">Ceiling</p>
+                  <p className="text-lg font-medium text-[#1A3A52]">
+                    {selections.selectedProductsData["Ceiling"].name}
                   </p>
                 </div>
               )}
