@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Download, Mail, Link2, RefreshCw, Check, X, User, Phone } from "lucide-react";
+import { Download, Mail, Link2, RefreshCw, Check, X, User, Phone, Sparkles } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 import { useNavigate } from "react-router";
 //ewfrsdkljsfzc
@@ -12,6 +12,16 @@ export function FinalResult() {
   const [showContactForm, setShowContactForm] = useState(false);
   const [contactData, setContactData] = useState({ name: "", phone: "", email: "" });
   const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isGenerating, setIsGenerating] = useState(true);
+
+  useEffect(() => {
+    // Show generating overlay for 1 second
+    const timer = setTimeout(() => {
+      setIsGenerating(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleDownload = () => {
     // Mock download functionality
@@ -47,7 +57,9 @@ export function FinalResult() {
   };
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center px-12 py-24">
+    <>
+      {/* Main Content */}
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center px-12 py-24">
       <div className="max-w-6xl w-full">
         {/* Top Navigation / Action */}
         <div className="flex justify-end mb-12">
@@ -90,14 +102,37 @@ export function FinalResult() {
               <div className="absolute inset-0">
                 <div className="w-full h-full flex justify-center items-center relative">
                   {/* Container with fixed aspect ratio */}
-                  <div className="relative inline-block">
+                  <div className="relative inline-block w-full max-w-[1000px]">
                     {/* Background Image - Relative Container */}
                     <img
                       src="/assets/staticBG.png"
                       alt="Your Custom Bathroom Design"
-                      className="object-contain block"
-                      style={{ width: '1000px', height: '475px' }}
+                      className="object-contain block w-full h-auto"
+                      style={{ aspectRatio: '1000/475' }}
                     />
+
+                    {/* Generating Overlay - Semi-transparent */}
+                    <AnimatePresence>
+                      {isGenerating && (
+                        <motion.div
+                          initial={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.5 }}
+                          className="absolute inset-0 bg-black/0 backdrop-blur-[2px] flex flex-col items-center justify-center z-50"
+                        >
+                          <div className="relative mb-6">
+                            <div className="w-16 h-16 border-4 border-[#2A9D8F]/20 border-t-[#2A9D8F] rounded-full animate-spin"></div>
+                            <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 text-[#2A9D8F]" />
+                          </div>
+                          <h3 className="text-2xl font-bold text-[#1A3A52] mb-2">
+                            Generating Your Design
+                          </h3>
+                          <p className="text-base text-[#6B6B6B]">
+                            Creating your dream bathroom...
+                          </p>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
 
                     {/* Overlay Selected Bathtub */}
                     {selections.selectedProductsData?.["Bathtub"] && (
@@ -536,6 +571,7 @@ export function FinalResult() {
           </div>
         )}
       </AnimatePresence>
-    </div>
+      </div>
+    </>
   );
 }
