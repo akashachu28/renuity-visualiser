@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { motion } from "motion/react";
-import { Check, ArrowRight, Sparkles, Loader2, X } from "lucide-react";
+import { Check, ArrowRight, Sparkles, Loader2, X, ChevronDown, ChevronUp } from "lucide-react";
 import { useDesign } from "../context/DesignContext";
 
 interface SKUOption {
@@ -269,6 +269,7 @@ export function ProductConfiguration() {
   }>({});
   const [isGenerating, setIsGenerating] = useState(false);
   const [hasGenerated, setHasGenerated] = useState(false);
+  const [isPreviewCollapsed, setIsPreviewCollapsed] = useState(false);
 
   const categories = Array.from(new Set(SKU_OPTIONS.map((s) => s.category)));
 
@@ -598,6 +599,21 @@ export function ProductConfiguration() {
                 </p>
               </div>
 
+              {/* Collapse button - visible only on tablet and mobile */}
+              <button
+                onClick={() => setIsPreviewCollapsed(!isPreviewCollapsed)}
+                className="lg:hidden flex items-center gap-2 px-4 py-2 rounded-full bg-[#F5F4F0] hover:bg-[#E8E6E1] transition-colors"
+              >
+                <span className="text-sm font-medium text-[#1A3A52]">
+                  {isPreviewCollapsed ? "Show" : "Hide"}
+                </span>
+                {isPreviewCollapsed ? (
+                  <ChevronDown className="w-5 h-5 text-[#1A3A52]" />
+                ) : (
+                  <ChevronUp className="w-5 h-5 text-[#1A3A52]" />
+                )}
+              </button>
+
               {/* Generate/Regenerate button - ONLY for uploaded images */}
               {isUploadedImage && (
                 <button
@@ -629,18 +645,20 @@ export function ProductConfiguration() {
             </div>
 
             {/* Preview Area */}
-            <div className="flex-1 relative rounded-3xl overflow-hidden bg-[#F5F4F0] shadow-2xl mb-4 group">
-              <div className="absolute inset-0">
+            <div className={`flex-1 relative rounded-3xl overflow-hidden bg-[#F5F4F0] shadow-2xl mb-4 group transition-all duration-300 ${
+              isPreviewCollapsed ? "lg:min-h-[300px] sm:min-h-[400px] min-h-0 h-0 lg:h-auto mb-0 lg:mb-4" : "min-h-[300px] sm:min-h-[400px]"
+            }`}>
+              <div className="absolute inset-0 flex items-center justify-center p-4">
                 {isGenerating ? (
                   <div className="w-full h-full flex flex-col items-center justify-center bg-[#F5F4F0]">
                     <div className="relative">
-                      <div className="w-20 h-20 border-4 border-[#2A9D8F]/20 border-t-[#2A9D8F] rounded-full animate-spin mb-6"></div>
-                      <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 text-[#2A9D8F]" />
+                      <div className="w-16 h-16 sm:w-20 sm:h-20 border-4 border-[#2A9D8F]/20 border-t-[#2A9D8F] rounded-full animate-spin mb-6"></div>
+                      <Sparkles className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-6 h-6 sm:w-8 sm:h-8 text-[#2A9D8F]" />
                     </div>
-                    <p className="text-xl font-bold text-[#1A3A52]">
+                    <p className="text-lg sm:text-xl font-bold text-[#1A3A52]">
                       Applying your choices...
                     </p>
-                    <p className="text-[#6B6B6B]">
+                    <p className="text-sm sm:text-base text-[#6B6B6B]">
                       This will only take a few moments
                     </p>
                   </div>
@@ -653,13 +671,13 @@ export function ProductConfiguration() {
                     className="w-full h-full flex justify-center items-center relative"
                   >
                     {/* Container with fixed aspect ratio */}
-                    <div className="relative inline-block">
+                    <div className="relative inline-block w-full max-w-[1000px]">
                       {/* Background Image - Relative Container */}
                       <img
                         src="/assets/staticBG.png"
                         alt="Bathroom Preview"
-                        className="object-contain block"
-                        style={{ width: '1000px', height: '475px' }}
+                        className="object-contain block w-full h-auto"
+                        style={{ aspectRatio: '1000/475' }}
                       />
 
                       {/* Overlay Selected Bathtub */}
@@ -874,8 +892,8 @@ export function ProductConfiguration() {
             </div>
 
             {/* Bottom Controls */}
-            <div className="flex items-center justify-between gap-6">
-              <div className="flex-1">
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+              <div className="flex-1 min-w-0">
                 {Object.keys(selectedProducts).length > 0 ? (
                   <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                     {Object.entries(selectedProducts).map(
@@ -886,7 +904,7 @@ export function ProductConfiguration() {
                         return (
                           <div
                             key={category}
-                            className="flex-shrink-0 bg-[#F5F4F0] px-4 py-2 rounded-full border border-[#E8E6E1] flex items-center gap-2"
+                            className="flex-shrink-0 bg-[#F5F4F0] px-3 sm:px-4 py-2 rounded-full border border-[#E8E6E1] flex items-center gap-2"
                           >
                             <span className="text-[10px] font-bold text-[#2A9D8F] uppercase">
                               {category}
@@ -908,10 +926,10 @@ export function ProductConfiguration() {
 
               <button
                 onClick={handleContinue}
-                className="flex items-center gap-3 px-5 py-3 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-[15px] shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0"
+                className="flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-5 py-3 bg-[#2A9D8F] hover:bg-[#238b7f] text-white rounded-2xl font-bold text-sm sm:text-[15px] shadow-xl shadow-[#2A9D8F]/20 transition-all hover:-translate-y-1 active:translate-y-0 whitespace-nowrap"
               >
                 <span>View Final Design</span>
-                <ArrowRight className="w-6 h-6" />
+                <ArrowRight className="w-5 h-5 sm:w-6 sm:h-6" />
               </button>
             </div>
           </div>
